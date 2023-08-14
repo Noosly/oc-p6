@@ -56,6 +56,13 @@ async function remplir_div_filters(catagories){
     return div_filters_innerHTML;
 }
 
+function change_selected_bouton(btn){
+    let ancien_selected_btn = document.querySelector(".filters__btn--selected");
+    ancien_selected_btn.classList.remove("filters__btn--selected");
+    btn.classList.add("filters__btn--selected");
+
+}
+
 
 
 
@@ -73,11 +80,13 @@ async function initialisation(url_work, div_gallery, div_filters){
         btn_filter_c.addEventListener('click', async function(){
             let filter_works = await filter_works_by_category(all_works, c);
             div_gallery.innerHTML = await remplir_div_gallery(filter_works);
+            change_selected_bouton(btn_filter_c);
         });
     }
     let btn_filter_tous = document.getElementById(`btn_filtre_Tous`);
         btn_filter_tous.addEventListener('click', async function(){
             div_gallery.innerHTML = await remplir_div_gallery(all_works);
+            change_selected_bouton(btn_filter_tous);
         });
     
     
