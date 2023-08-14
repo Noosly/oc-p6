@@ -186,3 +186,51 @@ footer nav ul {
 	margin: 2em
 }
 
+
+.filters{
+	display: flex;
+	justify-content: center;
+	gap: 30px;
+	margin: 20px;	
+}
+
+.filters__btn{
+	box-sizing: border-box;
+	height: 37px;
+	border: 1px solid #1D6154;
+	border-radius: 60px;
+
+
+
+	font-family: 'Syne';
+	font-style: normal;
+	font-weight: 700;
+	font-size: 16px;
+	line-height: 19px;
+	text-align: center;
+	color: #1D6154;
+	padding: 10px;
+
+
+
+}
+
+.filters__btn--selected{
+	box-sizing: border-box;
+	height: 37px;
+	background: #1D6154;
+	border: 1px solid #1D6154;
+	border-radius: 60px;	
+	font-family: 'Syne';
+	font-style: normal;
+	font-weight: 700;
+	font-size: 16px;
+	line-height: 19px;
+	text-align: center;
+	color: #FFFFFF;
+	padding: 10px;
+
+
+
+}
+

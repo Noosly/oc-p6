@@ -49,9 +49,9 @@ async function remplir_div_gallery(works){
 
 
 async function remplir_div_filters(catagories){
-    div_filters_innerHTML = `<button id="btn_filtre_Tous" class="filtre filtre--selected">Tous</button>`;
+    div_filters_innerHTML = `<button id="btn_filtre_Tous" class="filters__btn filters__btn--selected">Tous</button>`;
     for(let c of catagories){
-        div_filters_innerHTML += `<button id="btn_filtre_${c}" class="filtre">${c}</button>`;        
+        div_filters_innerHTML += `<button id="btn_filtre_${c}" class="filters__btn">${c}</button>`;        
     } 
     return div_filters_innerHTML;
 }
@@ -68,8 +68,20 @@ async function initialisation(url_work, div_gallery, div_filters){
     div_gallery.innerHTML = await remplir_div_gallery(all_works);
     let categories = await get_categories(url_work);
     div_filters.innerHTML = await remplir_div_filters(categories);
+    for(let c of categories){
+        let btn_filter_c = document.getElementById(`btn_filtre_${c}`);
+        btn_filter_c.addEventListener('click', async function(){
+            let filter_works = await filter_works_by_category(all_works, c);
+            div_gallery.innerHTML = await remplir_div_gallery(filter_works);
+        });
+    }
+    let btn_filter_tous = document.getElementById(`btn_filtre_Tous`);
+        btn_filter_tous.addEventListener('click', async function(){
+            div_gallery.innerHTML = await remplir_div_gallery(all_works);
+        });
     
     
+       
 }
 
 
