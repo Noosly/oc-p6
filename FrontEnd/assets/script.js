@@ -12,22 +12,33 @@ async function get_data(url){
 
 
 
+
+
+
 async function get_categories(url_works){
-    let works = await get_data(url)
+    let works = await get_data(url_works);
     let categories = new Set();
     for(let w of works){
-        categories.add(w.category);
+        categories.add(w.category.name);
     }
     return categories;
 }
 
 
 
+async function filter_works_by_category(all_works, category){
+    const works = all_works.filter((work) => work.category.name == category);
 
-async function remplir_div_gallery(div_gallery, works){
+
+    
+    return works;
+}
+
+
+async function remplir_div_gallery(works){
     div_gallery_innerHTML = "";
     for(let w of works){
-        div_gallery.innerHTML += `
+        div_gallery_innerHTML += `
             <figure>
                 <img src="${w.imageUrl}" alt="${w.imageUrl}">
                 <figcaption>${w.title}</figcaption>
@@ -37,11 +48,10 @@ async function remplir_div_gallery(div_gallery, works){
 }
 
 
-async function remplir_div_filters(div_filters, catagories){
-    div_filters_innerHTML = "";
+async function remplir_div_filters(catagories){
+    div_filters_innerHTML = `<button id="btn_filtre_Tous" class="filtre filtre--selected">Tous</button>`;
     for(let c of catagories){
-        div_gallery.innerHTML += `
-            <input></input>`
+        div_filters_innerHTML += `<button id="btn_filtre_${c}" class="filtre">${c}</button>`;        
     } 
     return div_filters_innerHTML;
 }
@@ -52,19 +62,20 @@ async function remplir_div_filters(div_filters, catagories){
 
 
 
-async function initialisation_travaux(url_work, div_gallery){
+async function initialisation(url_work, div_gallery, div_filters){
     //Récupération des travaux depuis le back-end     
     let all_works = await get_data(url_work);   
-    div_gallery.innerHTML = await remplir_div_gallery(div_gallery, all_works);
-       
+    div_gallery.innerHTML = await remplir_div_gallery(all_works);
+    let categories = await get_categories(url_work);
+    div_filters.innerHTML = await remplir_div_filters(categories);
+    
+    
 }
 
-async function initialisation_categories(){
-    let categories = await get_categories();
-
-}
 
 
 
+initialisation(url_work, div_gallery, div_filters);
 
-initialisation(url_work, div_gallery);
+
+
