@@ -1,6 +1,6 @@
 const div_gallery = document.querySelector(".gallery");
 const div_filters = document.querySelector(".filters");
-const 
+const a_login = document.querySelector("#a_login");
 const url_work =  "http://localhost:5678/api/works";
 
 //Définitiond des fonctions:
@@ -10,12 +10,6 @@ async function get_data(url){
     return data;    
 }
 
-
-
-
-
-
-
 async function get_categories(url_works){
     let works = await get_data(url_works);
     let categories = new Set();
@@ -24,8 +18,6 @@ async function get_categories(url_works){
     }
     return categories;
 }
-
-
 
 async function filter_works_by_category(all_works, category){
     const works = all_works.filter((work) => work.category.name == category);
@@ -64,12 +56,6 @@ function change_selected_bouton(btn){
 
 }
 
-
-
-
-
-
-
 async function initialisation(url_work, div_gallery, div_filters){
     //Récupération des travaux depuis le back-end     
     let all_works = await get_data(url_work);   
@@ -88,19 +74,29 @@ async function initialisation(url_work, div_gallery, div_filters){
         btn_filter_tous.addEventListener('click', async function(){
             div_gallery.innerHTML = await remplir_div_gallery(all_works);
             change_selected_bouton(btn_filter_tous);
-        });
-    
-    
-       
+        });   
+    a_login.addEventListener('click', function(){
+        let userId = localStorage.getItem("userId");
+        if(userId != ''){
+            localStorage.setItem("userId", '');
+            localStorage.setItem("token", '');
+        }
+    });    
+}
+
+function recuperInformationsUtilisateur(a_login){
+    let userId = localStorage.getItem("userId");
+    if(userId == ''){
+        a_login.textContent = "Login";
+    }
+    else{
+        a_login.textContent = "Logout";
+    }
 }
 
 
-
-
-
-
 initialisation(url_work, div_gallery, div_filters);
-recuperInformationsUtilisateur();
+recuperInformationsUtilisateur(a_login);
 
 
 

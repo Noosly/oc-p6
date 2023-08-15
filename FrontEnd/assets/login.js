@@ -35,7 +35,6 @@ async function  initialisation(btn, url_login){
         if(reponse.status == 200){
             localStorage.setItem("token", reponse.body.token);
             localStorage.setItem("userId", reponse.body.userId);
-            let keys = Object.keys(reponse.body);
             window.location.href = "./index.html";
            
 
