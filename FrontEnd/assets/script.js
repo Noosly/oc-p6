@@ -2,6 +2,7 @@ const div_gallery = document.querySelector(".gallery");
 const div_filters = document.querySelector(".filters");
 const a_login = document.querySelector("#a_login");
 const url_work =  "http://localhost:5678/api/works";
+const url_categories =  "http://localhost:5678/api/categories";
 
 //Définitiond des fonctions:
 async function get_data(url){
@@ -10,13 +11,13 @@ async function get_data(url){
     return data;    
 }
 
-async function get_categories(url_works){
-    let works = await get_data(url_works);
-    let categories = new Set();
-    for(let w of works){
-        categories.add(w.category.name);
+async function get_categories(url_categories){
+    let categories = await get_data(url_categories);
+    let set_categories = new Set();
+    for(let c of categories){
+        set_categories.add(c.name);
     }
-    return categories;
+    return set_categories;
 }
 
 async function filter_works_by_category(all_works, category){
@@ -60,7 +61,8 @@ async function initialisation(url_work, div_gallery, div_filters){
     //Récupération des travaux depuis le back-end     
     let all_works = await get_data(url_work);   
     div_gallery.innerHTML = await remplir_div_gallery(all_works);
-    let categories = await get_categories(url_work);
+    //let categories = await get_categories(url_work);
+    let categories =  await get_categories(url_categories);
     div_filters.innerHTML = await remplir_div_filters(categories);
     for(let c of categories){
         let btn_filter_c = document.getElementById(`btn_filtre_${c}`);
@@ -95,7 +97,7 @@ function recuperInformationsUtilisateur(a_login){
 }
 
 
-initialisation(url_work, div_gallery, div_filters);
+initialisation(url_work, div_gallery, div_filters, url_categories);
 recuperInformationsUtilisateur(a_login);
 
 
