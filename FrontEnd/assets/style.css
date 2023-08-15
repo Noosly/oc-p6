@@ -189,7 +189,7 @@ footer nav ul {
 	justify-content: flex-end;
 	margin: 2em
 }
-
+/*Modifications Nour*/
 
 .filters{
 	display: flex;
@@ -314,3 +314,15 @@ footer nav li{
 		line-height: 16px;
 		color: #000000;
 }
+
+
+header nav a {
+	text-decoration: none;
+	color: black;
+}
+
+header nav a:hover {
+	color: #B1663C;
+
+}
+

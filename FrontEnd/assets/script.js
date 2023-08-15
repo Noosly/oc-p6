@@ -1,5 +1,6 @@
 const div_gallery = document.querySelector(".gallery");
 const div_filters = document.querySelector(".filters");
+const 
 const url_work =  "http://localhost:5678/api/works";
 
 //Définitiond des fonctions:
@@ -96,7 +97,10 @@ async function initialisation(url_work, div_gallery, div_filters){
 
 
 
+
+
 initialisation(url_work, div_gallery, div_filters);
+recuperInformationsUtilisateur();
 
 
 
