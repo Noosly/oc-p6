@@ -125,6 +125,7 @@ li:hover {
 	text-align: center;
 	margin-bottom: 1em;
 }
+
 .gallery {
 	width: 100%;
 	display: grid;
@@ -234,3 +235,52 @@ footer nav ul {
 
 }
 
+
+
+
+.loginSection h2 {
+	text-align: center;
+	margin-bottom: 1em;
+}
+
+.loginForm{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	gap: 30px;
+	
+	top: 338px;	
+	margin-bottom: 500px;	
+
+}
+
+.loginFields{
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	gap: 30px;
+	margin: 20px;
+
+}
+.loginForm input{
+	width: 379px;
+	height: 51px;
+}
+
+.seConnecterBtn{
+	box-sizing: border-box;
+	height: 37px;
+	background: #1D6154;
+	border: 1px solid #1D6154;
+	border-radius: 60px;	
+	font-family: 'Syne';
+	font-style: normal;
+	font-weight: 700;
+	font-size: 16px;
+	line-height: 19px;
+	text-align: center;
+	color: #FFFFFF;
+	padding: 10px;
+	width: 179px;
+
+}
