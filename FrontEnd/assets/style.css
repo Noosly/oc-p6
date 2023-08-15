@@ -93,6 +93,9 @@ nav ul {
 nav li {
 	padding: 0 10px;
 	font-size: 1.2em;
+	
+
+
 }
 
 li:hover {
@@ -247,17 +250,16 @@ footer nav ul {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	gap: 30px;
-	
+	gap: 30px;	
 	top: 338px;	
-	margin-bottom: 500px;	
+	margin-bottom: 300px;	
 
 }
 
 .loginFields{
 	display: flex;
-	flex-direction: row;
-	justify-content: center;
+	flex-direction: column;
+	text-align: center;
 	gap: 30px;
 	margin: 20px;
 
@@ -265,6 +267,24 @@ footer nav ul {
 .loginForm input{
 	width: 379px;
 	height: 51px;
+	margin: auto;
+}
+
+.loginForm label{
+	margin-bottom: 0px;
+}
+
+.loginForm a{
+	width: 139px;
+	height: 16px;
+	font-family: 'Work Sans';
+	font-style: normal;
+	font-weight: 500;
+	font-size: 14px;
+	line-height: 16px;
+	text-decoration-line: underline;
+	color: #3D3D3D;
+	margin: auto;
 }
 
 .seConnecterBtn{
@@ -282,5 +302,15 @@ footer nav ul {
 	color: #FFFFFF;
 	padding: 10px;
 	width: 179px;
+	margin: auto;
 
+}
+
+footer nav li{
+		font-family: 'Work Sans';
+		font-style: normal;
+		font-weight: 300;
+		font-size: 14px;
+		line-height: 16px;
+		color: #000000;
 }
