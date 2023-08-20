@@ -382,15 +382,27 @@ header nav a:hover {
 	z-index: 1;
 	background-color: rgba(0, 0, 0, 0.3); 
 	overflow: auto;
-	visibility: hidden;
+	display: none;
 }
 
-.modal-content{	
+.photos-gallery{	
 		background-color: #fff;
 		margin: 20% auto;
 		padding: 10px;		
 		width: 40%;
 		border-radius: 10px;
+		visibility: hidden;
+		
+
+}
+
+.add-photo{	
+	background-color: #fff;
+	margin: 20% auto;
+	padding: 10px;		
+	width: 40%;
+	border-radius: 10px;
+	visibility: hidden;
 
 }
 
@@ -415,4 +427,16 @@ header nav a:hover {
 	
 	
 	
+}
+
+.photos-gallery__header{
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
+}
+
+.add-photo__header{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
 }
