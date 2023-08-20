@@ -93,17 +93,21 @@ function show_login_logout(a_login, userId){
 }
 
 
-function show_hide_edition_mode(header_edition, div_edition, userId){    
+function show_hide_edition_mode(header_edition, div_edition, div_filters, userId){    
     if(userId == ''){
         header_edition.style.display = 'none';
         div_edition.style.visibility = 'hidden';
+        div_filters.style.visibility = 'visible';
     }
     else{
         header_edition.style.display = "flex";
         div_edition.style.visibility = 'visible';
+        div_filters.style.visibility = 'hidden';
     }
     
 }
+
+
 
 const div_gallery = document.querySelector(".gallery");
 const div_filters = document.querySelector(".filters");
@@ -116,7 +120,8 @@ const div_edition = document.querySelector(".div_edition");
 initialisation(url_work, div_gallery, div_filters, url_categories);
 let userId = localStorage.getItem("userId");
 show_login_logout(a_login, userId);
-show_hide_edition_mode(header_edition, div_edition, userId);
+show_hide_edition_mode(header_edition, div_edition, div_filters, userId);
+
  
 
 
