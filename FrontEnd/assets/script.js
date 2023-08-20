@@ -93,21 +93,26 @@ function show_login_logout(a_login, userId){
 }
 
 
-function show_hide_edition_mode(header_edition, div_edition, div_filters, userId){    
+function show_hide_edition_mode(header_edition,  div_edition_intro, div_edition_projects, div_filters, userId){    
     if(userId == ''){
         header_edition.style.display = 'none';
-        div_edition.style.visibility = 'hidden';
+        div_edition_intro.style.visibility = 'hidden';
+        div_edition_projects.style.visibility = 'hidden';
         div_filters.style.visibility = 'visible';
     }
     else{
         header_edition.style.display = "flex";
-        div_edition.style.visibility = 'visible';
+        div_edition_intro.style.visibility = 'visible';
+        div_edition_projects.style.visibility = 'visible';
         div_filters.style.visibility = 'hidden';
     }
     
 }
 
-
+function open_modal_window(){
+    let modal_window = document.querySelector(".modal-window");
+    modal_window.style.visibility = 'visible'
+}
 
 const div_gallery = document.querySelector(".gallery");
 const div_filters = document.querySelector(".filters");
@@ -115,12 +120,15 @@ const a_login = document.querySelector("#a_login");
 const url_work =  "http://localhost:5678/api/works";
 const url_categories =  "http://localhost:5678/api/categories";
 const header_edition = document.querySelector(".header_edition");
-const div_edition = document.querySelector(".div_edition");
+const div_edition_intro = document.querySelector(".div-edition-introduction");
+const div_edition_projects = document.querySelector(".div-edition-projects");
 
 initialisation(url_work, div_gallery, div_filters, url_categories);
 let userId = localStorage.getItem("userId");
 show_login_logout(a_login, userId);
-show_hide_edition_mode(header_edition, div_edition, div_filters, userId);
+show_hide_edition_mode(header_edition, div_edition_intro, div_edition_projects, div_filters, userId);
+div_edition_intro.addEventListener('click', open_modal_window);
+div_edition_projects.addEventListener('click', open_modal_window);
 
  
 
