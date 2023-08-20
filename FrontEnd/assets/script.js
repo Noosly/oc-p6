@@ -1,8 +1,4 @@
-const div_gallery = document.querySelector(".gallery");
-const div_filters = document.querySelector(".filters");
-const a_login = document.querySelector("#a_login");
-const url_work =  "http://localhost:5678/api/works";
-const url_categories =  "http://localhost:5678/api/categories";
+
 
 //Définitiond des fonctions:
 async function get_data(url){
@@ -86,19 +82,43 @@ async function initialisation(url_work, div_gallery, div_filters){
     });    
 }
 
-function recuperInformationsUtilisateur(a_login){
-    let userId = localStorage.getItem("userId");
+function show_login_logout(a_login, userId){    
     if(userId == ''){
         a_login.textContent = "Login";
     }
     else{
         a_login.textContent = "Logout";
     }
+    
 }
 
 
+function show_edition_mode(header_edition, div_edition, userId){    
+    if(userId == ''){
+        header_edition.style.display = 'none';
+        div_edition.style.visibility = 'hidden';
+    }
+    else{
+        header_edition.style.display = "flex";
+        div_edition.style.visibility = 'visible';
+    }
+    
+}
+
+const div_gallery = document.querySelector(".gallery");
+const div_filters = document.querySelector(".filters");
+const a_login = document.querySelector("#a_login");
+const url_work =  "http://localhost:5678/api/works";
+const url_categories =  "http://localhost:5678/api/categories";
+const header_edition = document.querySelector(".header_edition");
+const div_edition = document.querySelector(".div_edition");
+
 initialisation(url_work, div_gallery, div_filters, url_categories);
-recuperInformationsUtilisateur(a_login);
+let userId = localStorage.getItem("userId");
+show_login_logout(a_login, userId);
+show_edition_mode(header_edition, div_edition, userId);
+
+
 
 
 

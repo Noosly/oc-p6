@@ -332,3 +332,57 @@ header nav a:hover {
 	font-weight: bold;
 }
 
+.div_edition{
+	visibility: hidden;
+	margin: auto;
+	width: 80%;
+}
+
+.header_edition{
+	background: black;
+	display: flex;
+	justify-content: center;
+	padding: 10px;
+	display: none;
+}
+
+
+.header_edition span{
+	color: white;
+	
+}
+
+
+.header_edition button{
+	background: white;
+	border-radius: 60px;
+	/* publier les changements */
+	font-family: 'Work Sans';
+	font-style: normal;
+	font-weight: 500;
+	font-size: 14px;
+	line-height: 16px;
+	text-align: center;
+	padding: 10px;	
+	margin-left: 10px;
+
+
+
+}
+
+/*
+&__coeur
+margin-left: 15%
+@include customized-font(0, 0, 0, 25px)
+padding-top: 20px
+.coeur_vide
+	display: inline
+.coeur_rempli
+	display: none
+	background: -webkit-gradient(linear, left top, left bottom, from(#9356DC), to(#FF79DA))
+	color: transparent
+	background-clip: text
+*/
+
+
+
