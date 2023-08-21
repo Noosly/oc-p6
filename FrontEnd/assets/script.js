@@ -112,14 +112,16 @@ function show_hide_edition_mode(header_edition,  div_edition_intro, div_edition_
 
 
 
-function open_modal_window(){
+async function open_modal_window(){
     let modal_window = document.querySelector(".modal-window");
     let gallery = document.querySelector(".photos-gallery");
     modal_window.style.display = 'block';
     gallery.style.visibility = 'visible';
     gallery_list = document.querySelector(".photos-gallery__list");
-    let current_works = localStorage.getItem("currentWorks");
-    gallery_list.innerHTML = fill_div_gallery(current_works);
+    //let current_works = localStorage.getItem("currentWorks");
+    
+    let current_works = await get_data(url_work);
+    gallery_list.innerHTML = await fill_div_gallery(current_works);
 }
 
 const div_gallery = document.querySelector(".gallery");
@@ -131,13 +133,15 @@ const header_edition = document.querySelector(".header_edition");
 const div_edition_intro = document.querySelector(".div-edition-introduction");
 const div_edition_projects = document.querySelector(".div-edition-projects");
 
-let current_works = initialisation(url_work, div_gallery, div_filters, url_categories);
+initialisation(url_work, div_gallery, div_filters, url_categories);
 let userId = localStorage.getItem("userId");
 show_login_logout(a_login, userId);
 show_hide_edition_mode(header_edition, div_edition_intro, div_edition_projects, div_filters, userId);
 div_edition_intro.addEventListener('click', open_modal_window);
 div_edition_projects.addEventListener('click', open_modal_window);
-localStorage.setItem("currentWorks", current_works);
+//localStorage.setItem("currentWorks", current_works);
+
+
 
 
  

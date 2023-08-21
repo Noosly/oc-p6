@@ -440,3 +440,34 @@ header nav a:hover {
 	flex-direction: row;
 	justify-content: space-between;
 }
+
+.photos-gallery__list{
+	display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr; 
+}
+
+.photos-gallery__list figure img{
+	width: 150px;
+}
+
+.photos-gallery__list figure figcaption{
+	width: 150px;
+}
+
+.photos-gallery__add{	
+	box-sizing: border-box;
+	height: 37px;
+	background: #1D6154;
+	border: 1px solid #1D6154;
+	border-radius: 60px;	
+	font-family: 'Syne';
+	font-style: normal;
+	font-weight: 700;
+	font-size: 16px;
+	line-height: 19px;
+	text-align: center;
+	color: #FFFFFF;
+	padding: 10px;
+	width: 179px;
+	margin: auto;
+}
