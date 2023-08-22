@@ -383,6 +383,7 @@ header nav a:hover {
 	background-color: rgba(0, 0, 0, 0.3); 
 	overflow: auto;
 	display: none;
+	
 }
 
 .photos-gallery{	
@@ -392,6 +393,7 @@ header nav a:hover {
 		width: 40%;
 		border-radius: 10px;
 		visibility: hidden;
+		padding: 40px;
 		
 
 }
@@ -433,6 +435,7 @@ header nav a:hover {
 	display: flex;
 	flex-direction: row;
 	justify-content: flex-end;
+	z-index: 20;
 }
 
 .add-photo__header{
@@ -443,16 +446,35 @@ header nav a:hover {
 
 .photos-gallery__list{
 	display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr; 
+  	grid-template-columns: 1fr 1fr 1fr 1fr 1fr; 
+}
+
+.photos-gallery__list figure{
+	position: relative;
+	width: fit-content;
 }
 
 .photos-gallery__list figure img{
-	width: 150px;
+	width: 120px;
 }
 
 .photos-gallery__list figure figcaption{
-	width: 150px;
+	width: 120px;
 }
+
+.photos-gallery__list figure div{
+	background-color: #000000;	
+	cursor: pointer;
+	width: fit-content;
+	padding: 5px;
+	position: absolute;
+	z-index: 1;
+	right: 10px;
+	top: 10px;
+
+}
+
+
 
 .photos-gallery__add{	
 	box-sizing: border-box;
@@ -471,3 +493,14 @@ header nav a:hover {
 	width: 179px;
 	margin: auto;
 }
+
+.modal-window-exit{
+	cursor: pointer;
+	font-size: large;
+	height: 50px;
+	
+	
+}
+
+
+

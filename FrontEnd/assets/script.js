@@ -37,6 +37,22 @@ async function fill_div_gallery(works){
     return div_gallery_innerHTML;
 }
 
+async function fill_div_gallery_modal_window(works){
+    div_gallery_innerHTML = "";
+    for(let w of works){
+        div_gallery_innerHTML += `
+            <figure>            
+                <div>
+                    <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><style>svg{fill:#ffffff}</style><path d="M135.2 17.7C140.6 6.8 151.7 0 163.8 0H284.2c12.1 0 23.2 6.8 28.6 17.7L320 32h96c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 96 0 81.7 0 64S14.3 32 32 32h96l7.2-14.3zM32 128H416V448c0 35.3-28.7 64-64 64H96c-35.3 0-64-28.7-64-64V128zm96 64c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16z"/></svg>
+                </div>                
+                <img src="${w.imageUrl}" alt="${w.imageUrl}">
+                <figcaption>${w.title}</figcaption>
+            </figure>`
+    } 
+    return div_gallery_innerHTML;
+}
+
+
 
 async function fill_div_filters(catagories){
     div_filters_innerHTML = `<button id="btn_filter_Tous" class="filters__btn filters__btn--selected">Tous</button>`;
@@ -121,7 +137,18 @@ async function open_modal_window(){
     //let current_works = localStorage.getItem("currentWorks");
     
     let current_works = await get_data(url_work);
-    gallery_list.innerHTML = await fill_div_gallery(current_works);
+    gallery_list.innerHTML = await fill_div_gallery_modal_window(current_works);
+}
+
+function close_modal_window(){
+    let modal_window = document.querySelector(".modal-window");
+    let gallery = document.querySelector(".photos-gallery");
+    let add_photo = document.querySelector(".add-photo");
+
+    modal_window.style.display = 'none';
+    gallery.style.visibility = 'hidden';
+    add_photo.style.visibility = 'hidden';
+
 }
 
 const div_gallery = document.querySelector(".gallery");
@@ -132,6 +159,7 @@ const url_categories =  "http://localhost:5678/api/categories";
 const header_edition = document.querySelector(".header_edition");
 const div_edition_intro = document.querySelector(".div-edition-introduction");
 const div_edition_projects = document.querySelector(".div-edition-projects");
+const modal_window_exit = document.querySelector(".modal-window-exit");
 
 initialisation(url_work, div_gallery, div_filters, url_categories);
 let userId = localStorage.getItem("userId");
@@ -140,6 +168,8 @@ show_hide_edition_mode(header_edition, div_edition_intro, div_edition_projects, 
 div_edition_intro.addEventListener('click', open_modal_window);
 div_edition_projects.addEventListener('click', open_modal_window);
 //localStorage.setItem("currentWorks", current_works);
+modal_window_exit.addEventListener('click', close_modal_window);
+
 
 
 
