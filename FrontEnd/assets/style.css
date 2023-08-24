@@ -333,7 +333,7 @@ header nav a:hover {
 }
 
 .div-edition-introduction, .div-edition-projects{
-	visibility: hidden;
+	display: none;
 	margin: auto;
 	width: 80%;
 	cursor: pointer;
@@ -392,7 +392,7 @@ header nav a:hover {
 		padding: 10px;		
 		width: 40%;
 		border-radius: 10px;
-		visibility: hidden;
+		display: block;
 		padding: 40px;
 		
 
@@ -408,7 +408,8 @@ header nav a:hover {
 	padding: 10px;		
 	width: 40%;
 	border-radius: 10px;
-	visibility: hidden;
+	display: none;
+	cursor: pointer;
 
 }
 
