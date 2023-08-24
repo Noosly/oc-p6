@@ -43,10 +43,10 @@ async function fill_div_gallery_modal_window(works){
         div_gallery_innerHTML += `
             <figure>            
                 <div>
-                    <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><style>svg{fill:#ffffff}</style><path d="M135.2 17.7C140.6 6.8 151.7 0 163.8 0H284.2c12.1 0 23.2 6.8 28.6 17.7L320 32h96c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 96 0 81.7 0 64S14.3 32 32 32h96l7.2-14.3zM32 128H416V448c0 35.3-28.7 64-64 64H96c-35.3 0-64-28.7-64-64V128zm96 64c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16z"/></svg>
+                    <svg id="modal_window_photo_${w.id}" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><style>svg{fill:#ffffff}</style><path d="M135.2 17.7C140.6 6.8 151.7 0 163.8 0H284.2c12.1 0 23.2 6.8 28.6 17.7L320 32h96c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 96 0 81.7 0 64S14.3 32 32 32h96l7.2-14.3zM32 128H416V448c0 35.3-28.7 64-64 64H96c-35.3 0-64-28.7-64-64V128zm96 64c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16z"/></svg>
                 </div>                
                 <img src="${w.imageUrl}" alt="${w.imageUrl}">
-                <figcaption>${w.title}</figcaption>
+                <figcaption>éditer</figcaption>
             </figure>`
     } 
     return div_gallery_innerHTML;
@@ -125,8 +125,23 @@ function show_hide_edition_mode(header_edition,  div_edition_intro, div_edition_
     }
     
 }
+function delete_work(id_work){
+    alert(`delete work ${id_work}`)
 
 
+}
+
+async function add_event_listenerer_to_modal_window_photo(works){
+    for(let w of works){
+        let modal_window_photo = document.querySelector(`#modal_window_photo_${w.id}`);
+        modal_window_photo.addEventListener('click', async function(){
+            delete_work(w.id);                
+        });
+    
+    }
+    
+    
+} 
 
 async function open_modal_window(){
     let modal_window = document.querySelector(".modal-window");
@@ -138,6 +153,8 @@ async function open_modal_window(){
     
     let current_works = await get_data(url_work);
     gallery_list.innerHTML = await fill_div_gallery_modal_window(current_works);
+    await add_event_listenerer_to_modal_window_photo(current_works);
+    
 }
 
 function close_modal_window(){

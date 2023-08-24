@@ -398,6 +398,10 @@ header nav a:hover {
 
 }
 
+.photos-gallery hr{
+	margin: 30px;
+}
+
 .add-photo{	
 	background-color: #fff;
 	margin: 20% auto;
@@ -492,6 +496,17 @@ header nav a:hover {
 	padding: 10px;
 	width: 179px;
 	margin: auto;
+}
+
+.photos-gallery__remove{
+	height: 17px;
+	text-align: center;
+	font-family: 'Syne';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 14px;
+	color: #D65353;
+	margin: 20px;
 }
 
 .modal-window-exit{
