@@ -303,7 +303,7 @@ footer nav ul {
 	padding: 10px;
 	width: 179px;
 	margin: auto;
-
+	cursor: pointer;
 }
 
 footer nav li{
@@ -402,7 +402,7 @@ header nav a:hover {
 	margin: 30px;
 }
 
-.add-photo{	
+.new-photo{	
 	background-color: #fff;
 	margin: 20% auto;
 	padding: 10px;		
@@ -443,7 +443,7 @@ header nav a:hover {
 	z-index: 20;
 }
 
-.add-photo__header{
+.new-photo__header{
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
@@ -497,6 +497,7 @@ header nav a:hover {
 	padding: 10px;
 	width: 179px;
 	margin: auto;
+	cursor: pointer;
 }
 
 .photos-gallery__remove{
@@ -508,13 +509,22 @@ header nav a:hover {
 	font-size: 14px;
 	color: #D65353;
 	margin: 20px;
+	cursor: pointer;
 }
 
-.modal-window-exit{
+.exit{
 	cursor: pointer;
 	font-size: large;
-	height: 50px;
+	height: 50px;	
+}
+
+.new-photo-back{
+	fill: #000000;
 }
 
 
 
+.new-photo__validate{
+	background-color: grey;
+	color: white;
+}

@@ -144,13 +144,13 @@ async function add_event_listenerer_to_modal_window_photo(works){
 
 function modal_window_go_to_add_photo(){
     let gallery = document.querySelector(".photos-gallery");
-    let add_photo = document.querySelector(".add-photo");
+    let add_photo = document.querySelector(".new-photo");
     gallery.style.display = 'none';
     add_photo.style.display = 'block';
 }
 
 function modal_window_go_to_gallery(){
-    let add_photo = document.querySelector(".add-photo");
+    let add_photo = document.querySelector(".new-photo");
     let gallery = document.querySelector(".photos-gallery");
     add_photo.style.display = 'none';
     gallery.style.display = 'block';
@@ -168,15 +168,15 @@ async function open_modal_window(){
     await add_event_listenerer_to_modal_window_photo(current_works);
     let btn_add_photo = document.querySelector(".photos-gallery__add");
     btn_add_photo.addEventListener('click', modal_window_go_to_add_photo);
-    let btn_back_to_gallery = document.querySelector(".back");
-    btn_back_to_gallery.addEventListener('click', modal_window_go_to_gallery);
+    let btn_new_photo_back = document.querySelector(".new-photo-back");
+    btn_new_photo_back.addEventListener('click', modal_window_go_to_gallery);
     
 }
 
 function close_modal_window(){
     let modal_window = document.querySelector(".modal-window");
     let gallery = document.querySelector(".photos-gallery");
-    let add_photo = document.querySelector(".add-photo");
+    let add_photo = document.querySelector(".new-photo");
 
     modal_window.style.display = 'none';
     gallery.style.display = 'none';
@@ -192,7 +192,8 @@ const url_categories =  "http://localhost:5678/api/categories";
 const header_edition = document.querySelector(".header_edition");
 const div_edition_intro = document.querySelector(".div-edition-introduction");
 const div_edition_projects = document.querySelector(".div-edition-projects");
-const modal_window_exit = document.querySelector(".modal-window-exit");
+const exit_photos_gallery = document.querySelector("#exit-photos-gallery");
+const exit_add_photo = document.querySelector("#exit-new-photo");
 
 initialisation(url_work, div_gallery, div_filters, url_categories);
 let userId = localStorage.getItem("userId");
@@ -201,7 +202,8 @@ show_hide_edition_mode(header_edition, div_edition_intro, div_edition_projects, 
 div_edition_intro.addEventListener('click', open_modal_window);
 div_edition_projects.addEventListener('click', open_modal_window);
 //localStorage.setItem("currentWorks", current_works);
-modal_window_exit.addEventListener('click', close_modal_window);
+exit_photos_gallery.addEventListener('click', close_modal_window);
+exit_add_photo.addEventListener('click', close_modal_window);
 
 
 
