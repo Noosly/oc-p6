@@ -214,7 +214,8 @@ footer nav ul {
 	text-align: center;
 	color: #1D6154;
 	padding: 10px;
-
+	margin: 10px;
+	cursor: pointer;
 
 
 }
@@ -233,9 +234,7 @@ footer nav ul {
 	text-align: center;
 	color: #FFFFFF;
 	padding: 10px;
-
-
-
+	margin: 10px;
 }
 
 
@@ -417,21 +416,20 @@ header nav a:hover {
 	display: flex;
 	justify-content: space-around;
 	gap: 0;
-	
-	
+	align-items: center;
 	
 }
 
 .projects h2{
 	margin-left: auto;
-	margin-right: 0;
+	margin-right: auto;
+	width: fit-content;
 }
 
 .div-edition-projects{
 	margin-bottom: 2em;
 	margin-left: 1em;
 	width: fit-content;
-	
 	
 	
 }
@@ -526,5 +524,10 @@ header nav a:hover {
 
 .new-photo__validate{
 	background-color: grey;
+
 	color: white;
+}
+
+label,select,input{
+	display: block;
 }

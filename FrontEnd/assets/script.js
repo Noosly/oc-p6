@@ -17,10 +17,7 @@ async function get_categories(url_categories){
 }
 
 async function filter_works_by_category(all_works, category){
-    const works = all_works.filter((work) => work.category.name == category);
-
-
-    
+    const works = all_works.filter((work) => work.category.name == category);    
     return works;
 }
 
@@ -30,7 +27,7 @@ async function fill_div_gallery(works){
     for(let w of works){
         div_gallery_innerHTML += `
             <figure>
-                <img src="${w.imageUrl}" alt="${w.imageUrl}">
+                <img src="${w.imageUrl}" alt="${w.title}">
                 <figcaption>${w.title}</figcaption>
             </figure>`
     } 
@@ -66,14 +63,13 @@ function change_selected_bouton(btn){
     let ancien_selected_btn = document.querySelector(".filters__btn--selected");
     ancien_selected_btn.classList.remove("filters__btn--selected");
     btn.classList.add("filters__btn--selected");
-
 }
 
 async function initialisation(url_work, div_gallery, div_filters){
     //Récupération des travaux depuis le back-end     
     let all_works = await get_data(url_work);   
     div_gallery.innerHTML = await fill_div_gallery(all_works);
-    //let categories = await get_categories(url_work);
+    //Récupérer les catégories
     let categories =  await get_categories(url_categories);
     div_filters.innerHTML = await fill_div_filters(categories);
     for(let c of categories){
@@ -89,6 +85,7 @@ async function initialisation(url_work, div_gallery, div_filters){
             div_gallery.innerHTML = await fill_div_gallery(all_works);
             change_selected_bouton(btn_filter_tous);
         });   
+    
     a_login.addEventListener('click', function(){
         let userId = localStorage.getItem("userId");
         if(userId != ''){
