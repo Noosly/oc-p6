@@ -50,8 +50,8 @@ async function fill_div_gallery_modal_window(works){
     for(let w of works){
         div_gallery_innerHTML += `
             <figure id="modal_window_figure_${w.id}">            
-                <div>
-                    <svg id="modal_window_photo_${w.id}" work-id="${w.id}" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><style>svg{fill:#ffffff}</style><path d="M135.2 17.7C140.6 6.8 151.7 0 163.8 0H284.2c12.1 0 23.2 6.8 28.6 17.7L320 32h96c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 96 0 81.7 0 64S14.3 32 32 32h96l7.2-14.3zM32 128H416V448c0 35.3-28.7 64-64 64H96c-35.3 0-64-28.7-64-64V128zm96 64c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16z"/></svg>
+                <div >
+                    <svg id="modal_window_photo_${w.id}"  work-id="${w.id}" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><style>svg{fill:#ffffff}</style><path d="M135.2 17.7C140.6 6.8 151.7 0 163.8 0H284.2c12.1 0 23.2 6.8 28.6 17.7L320 32h96c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 96 0 81.7 0 64S14.3 32 32 32h96l7.2-14.3zM32 128H416V448c0 35.3-28.7 64-64 64H96c-35.3 0-64-28.7-64-64V128zm96 64c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16z"/></svg>
                 </div>                
                 <img src="${w.imageUrl}" alt="${w.imageUrl}">
                 <figcaption>éditer</figcaption>
@@ -144,13 +144,18 @@ function add_event_listenerer_to_modal_window_photo(works, works_url){
     for(let w of works){
         let modal_window_photo = document.querySelector(`#modal_window_photo_${w.id}`);
         modal_window_photo.addEventListener('click', async function(event){
-            event.preventDefault();            
+            event.preventDefault();
             let response = await delete_work(works_url, w.id);
             if(response.ok){                
                 alert(`La photo ID ${w.id} supprimée avec succès`);
-                let modal_window_figure = document.querySelector(`#modal_window_figure_${w.id}`);
-                modal_window_figure.remove();   
-                let gallery_photo_figure = document.querySelector(`#gallery_photo_figure_${w.id}`);    
+                
+                let modal_window_figure = document.getElementById(`modal_window_figure_${w.id}`);
+                
+                //modal_window_figure.remove(); 
+                //modal_window_photo.remove();
+                let figure = this.parentElement.parentElement;
+                figure.remove();
+                let gallery_photo_figure = document.getElementById(`gallery_photo_figure_${w.id}`);    
                 gallery_photo_figure.remove();
                 div_edition_intro.closest()
             }
@@ -176,19 +181,20 @@ function modal_window_go_to_gallery(){
 }
 
 async function open_modal_window(){
-    let modal_window = document.querySelector(".modal-window");
-    let gallery = document.querySelector(".photos-gallery");
-    modal_window.style.display = 'block';
-    gallery.style.display = 'block';
     gallery_list = document.querySelector(".photos-gallery__list");
     //let current_works = localStorage.getItem("currentWorks");    
     let current_works = await get_data(url_work);
     gallery_list.innerHTML = await fill_div_gallery_modal_window(current_works);
-    ////add_event_listenerer_to_modal_window_photo(current_works, url_work);
+    add_event_listenerer_to_modal_window_photo(current_works, url_work);
     let btn_add_photo = document.querySelector(".photos-gallery__add");
     btn_add_photo.addEventListener('click', modal_window_go_to_add_photo);
     let btn_new_photo_back = document.querySelector(".new-photo-back");
-    btn_new_photo_back.addEventListener('click', modal_window_go_to_gallery);    
+    btn_new_photo_back.addEventListener('click', modal_window_go_to_gallery);  
+    ////
+    let modal_window = document.querySelector(".modal-window");
+    let gallery = document.querySelector(".photos-gallery");
+    modal_window.style.display = 'block';
+    gallery.style.display = 'block';
 }
 
 function close_modal_window(){
@@ -198,7 +204,11 @@ function close_modal_window(){
     modal_window.style.display = 'none';
     gallery.style.display = 'none';
     add_photo.style.display = 'none';
+    location.reload();
 }
+
+
+
 
 const div_gallery = document.querySelector(".gallery");
 const div_filters = document.querySelector(".filters");
@@ -217,7 +227,8 @@ show_login_logout(a_login, userId);
 show_hide_edition_mode(header_edition, div_edition_intro, div_edition_projects, div_filters, userId);
 div_edition_intro.addEventListener('click', open_modal_window);
 div_edition_projects.addEventListener('click', open_modal_window);
-modal_window_all_photos_delete_add_event_listener();
+//Exp
+////modal_window_all_photos_delete_add_event_listener(url_work);
 //localStorage.setItem("currentWorks", current_works);
 exit_photos_gallery.addEventListener('click', close_modal_window);
 exit_add_photo.addEventListener('click', close_modal_window);

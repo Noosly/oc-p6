@@ -477,7 +477,17 @@ header nav a:hover {
 
 }
 
+.photos-gallery__list figure form{
+	background-color: #000000;	
+	cursor: pointer;
+	width: fit-content;
+	padding: 5px;
+	position: absolute;
+	z-index: 1;
+	right: 10px;
+	top: 10px;
 
+}
 
 .photos-gallery__add{	
 	box-sizing: border-box;
