@@ -166,11 +166,19 @@ function add_event_listenerer_to_modal_window_photo(works, works_url){
     }       
 } 
 
-function modal_window_go_to_add_photo(){
+async function modal_window_go_to_add_photo(){
     let gallery = document.querySelector(".photos-gallery");
     let add_photo = document.querySelector(".new-photo");
     gallery.style.display = 'none';
     add_photo.style.display = 'block';
+    let input_category = document.querySelector("#input_category");
+    let categories = await get_data(url_categories);
+    input_category.innerHTML = `<option value="0"></option>`
+    for(let c of categories){
+        input_category.innerHTML += `<option value="${c.id}">${c.name}</option>`
+    }
+    
+
 }
 
 function modal_window_go_to_gallery(){
@@ -220,6 +228,7 @@ const div_edition_intro = document.querySelector(".div-edition-introduction");
 const div_edition_projects = document.querySelector(".div-edition-projects");
 const exit_photos_gallery = document.querySelector("#exit-photos-gallery");
 const exit_add_photo = document.querySelector("#exit-new-photo");
+const btn_browse_photo = document.querySelector(".div-browse-photo__btn-add-photo");
 
 initialisation(url_work, div_gallery, div_filters, url_categories);
 let userId = localStorage.getItem("userId");
@@ -232,6 +241,8 @@ div_edition_projects.addEventListener('click', open_modal_window);
 //localStorage.setItem("currentWorks", current_works);
 exit_photos_gallery.addEventListener('click', close_modal_window);
 exit_add_photo.addEventListener('click', close_modal_window);
+
+//btn_browse_photo
 
 
 

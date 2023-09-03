@@ -144,43 +144,41 @@
 			<div class="exit" id="exit-new-photo">x</div>
 			</div>
 		<div class="new-photo__content">
+			<span class="new-photo__title">Ajout photo</span>
 			<div class="div-browse-photo">
 				<br>
-				<img src="" alt="...">
-				<br>
-				<br>
-				<br>
-				+Ajouter photo
-				<br>
-				<br>
-				<br><br>
-
-
-				<br>
-				jpg, png: 4mo max
+				<img src="assets/icons/image-02-svgrepo-com.svg" alt="svg repo" class="div-browse-photo__svg-empty-image">
+				<img src="" alt="..." class="div-browse-photo__new-photo-img">
+				<div class="div-browse-photo__btn-add-photo">+Ajouter photo</div>
+				<div class="div-browse-photo__photo-format">jpg, png: 4mo max</div>
 			</div>
-			
-				<label for="input_title">Titre</label>
+			<form>
+				<label for="input_title" class="new-photo__label">Titre</label>
 				<input type="text" id="input_title">
 		
 			
-				<label for="input_category">Catégorie</label>
+				<label for="input_category" class="new-photo__label">Catégorie</label>
 				<select id="input_category">
-					<option vlaue="0"></option>
+					<option value="0"></option>
 					<option vlaue="1">Catégorie 1</option>
-					<option vlaue="2">Catégorie 2</option>
-					<option vlaue="3">Catégorie 3</option>
+					<option value="2">Catégorie 2</option>
+					<option value="3">Catégorie 3</option>
 				</select>
 
+				<hr>
+				<div class="new-photo__validate">Valider</div>
+
+			</form>
+			
+			
+
 			
 			
 			
 			
-			<hr>
+			
 
 		</div>
-		<hr>
-		<div class="new-photo__validate">Validate</div>
 	</div>
 
 </div>
