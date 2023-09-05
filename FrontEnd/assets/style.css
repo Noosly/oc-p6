@@ -587,7 +587,7 @@ header nav a:hover {
 	display: none;
 }
 
-.div-browse-photo__btn-add-photo{
+.div-browse-photo__label-add-photo{
 	width: 173px;
 	background: #CBD6DC;
 	border-radius: 50px;
@@ -600,6 +600,11 @@ header nav a:hover {
 	padding: 7px;
 	color: #306685;
 	cursor: pointer;
+}
+
+#div-browse-photo__btn-add-photo{
+	display: none;
+
 }
 
 label,select,input{

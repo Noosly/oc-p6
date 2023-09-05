@@ -149,7 +149,7 @@ function add_event_listenerer_to_modal_window_photo(works, works_url){
             if(response.ok){                
                 alert(`La photo ID ${w.id} supprimée avec succès`);
                 
-                let modal_window_figure = document.getElementById(`modal_window_figure_${w.id}`);
+                //let modal_window_figure = document.getElementById(`modal_window_figure_${w.id}`);
                 
                 //modal_window_figure.remove(); 
                 //modal_window_photo.remove();
@@ -157,7 +157,7 @@ function add_event_listenerer_to_modal_window_photo(works, works_url){
                 figure.remove();
                 let gallery_photo_figure = document.getElementById(`gallery_photo_figure_${w.id}`);    
                 gallery_photo_figure.remove();
-                div_edition_intro.closest()
+                //div_edition_intro.closest()
             }
             //modal_window.style.display = 'block';
             //gallery.style.display = 'block';
@@ -228,7 +228,9 @@ const div_edition_intro = document.querySelector(".div-edition-introduction");
 const div_edition_projects = document.querySelector(".div-edition-projects");
 const exit_photos_gallery = document.querySelector("#exit-photos-gallery");
 const exit_add_photo = document.querySelector("#exit-new-photo");
-const btn_browse_photo = document.querySelector(".div-browse-photo__btn-add-photo");
+const btn_browse_photo = document.querySelector("#div-browse-photo__btn-add-photo");
+const new_photo_img = document.querySelector(".div-browse-photo__new-photo-img");
+
 
 initialisation(url_work, div_gallery, div_filters, url_categories);
 let userId = localStorage.getItem("userId");
@@ -241,8 +243,14 @@ div_edition_projects.addEventListener('click', open_modal_window);
 //localStorage.setItem("currentWorks", current_works);
 exit_photos_gallery.addEventListener('click', close_modal_window);
 exit_add_photo.addEventListener('click', close_modal_window);
+btn_browse_photo.addEventListener('change', function(event){
+    const selectedFile = event.target.files[0];
+    
+    
+ 
+    alert(selectedFile);
+})
 
-//btn_browse_photo
 
 
 
