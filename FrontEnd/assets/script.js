@@ -230,7 +230,11 @@ const exit_photos_gallery = document.querySelector("#exit-photos-gallery");
 const exit_add_photo = document.querySelector("#exit-new-photo");
 const btn_browse_photo = document.querySelector("#div-browse-photo__btn-add-photo");
 const new_photo_img = document.querySelector(".div-browse-photo__new-photo-img");
+const new_photo_title = document.querySelector("#input_title");
+const new_photo_category = document.querySelector("#input_category");
+const new_photo_validate = document.querySelector("#new-photo__validate");
 
+var selectedFile; 
 
 initialisation(url_work, div_gallery, div_filters, url_categories);
 let userId = localStorage.getItem("userId");
@@ -244,11 +248,23 @@ div_edition_projects.addEventListener('click', open_modal_window);
 exit_photos_gallery.addEventListener('click', close_modal_window);
 exit_add_photo.addEventListener('click', close_modal_window);
 btn_browse_photo.addEventListener('change', function(event){
-    const selectedFile = event.target.files[0];
-    
-    
- 
+    selectedFile = event.target.files[0];
+    //if(){        
+        new_photo_validate.disable = false;
+        new_photo_validate.classList.add('new-photo__validate--enabled');
+
+    //}
+        
+    /*const title = new_photo_title.value;
+    const category = new_photo_category.selected; 
     alert(selectedFile);
+    alert(title);
+    alert(category);*/
+});
+
+
+new_photo_validate.addEventListener('click', function(){
+    alert('yes');
 })
 
 

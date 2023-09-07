@@ -551,9 +551,14 @@ header nav a:hover {
 	text-align: center;
 	vertical-align: middle;
 	padding: 10px;
-	margin: auto;
+	margin-left: 100px;
+	
+	
 } 
 
+.new-photo__validate--enabled{
+	background-color: #1D6154;
+}
 .new-photo__title{
 	font-family: 'Work Sans';
 	font-style: normal;
