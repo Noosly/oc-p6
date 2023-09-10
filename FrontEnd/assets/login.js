@@ -18,8 +18,8 @@ async function post_data(url, data){
 }
 
 async function authentification(url_login, user){
-    let reponse = await post_data(url_login, user);
-    return reponse;
+    let response = await post_data(url_login, user);
+    return response;
 
 }
 

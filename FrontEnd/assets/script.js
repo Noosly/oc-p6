@@ -18,6 +18,22 @@ async function delete_data(url, id){
     return reponse;
 }
 
+async function post_data(url, data){
+    const token = localStorage.getItem("token");
+    const reponse = await fetch(url, {
+        method: 'POST',
+        headers: {
+            //'Content-Type': 'multipart/form-data',
+            'Authorization': `Bearer ${token}`//,
+            //'accept': 'application/json'             
+        },
+        body: JSON.stringify(data)
+    });
+    const reponse_body = await reponse.json();
+    const reponse_status =  reponse.status;
+    return {"status": reponse_status, "body": reponse_body};    
+}
+
 async function get_categories(url_categories){
     let categories = await get_data(url_categories);
     let set_categories = new Set();
@@ -247,8 +263,10 @@ div_edition_projects.addEventListener('click', open_modal_window);
 //localStorage.setItem("currentWorks", current_works);
 exit_photos_gallery.addEventListener('click', close_modal_window);
 exit_add_photo.addEventListener('click', close_modal_window);
+
 btn_browse_photo.addEventListener('change', function(event){
     selectedFile = event.target.files[0];
+    localStorage.setItem("selectedImage", selectedFile);
     //if(){        
         new_photo_validate.disable = false;
         new_photo_validate.classList.add('new-photo__validate--enabled');
@@ -263,9 +281,25 @@ btn_browse_photo.addEventListener('change', function(event){
 });
 
 
-new_photo_validate.addEventListener('click', function(){
-    alert('yes');
-})
+new_photo_validate.addEventListener('click', async function(){
+    var selectedImage = localStorage.getItem("selectedImage");
+    var formData = new FormData();
+    formData.append('image', selectedImage +  ';type=image/jpeg');
+    var input_title = document.querySelector('#input_title');
+    formData.append('title', input_title.value);
+    var input_category = document.querySelector('#input_category');
+    formData.append('category', input_category.value);
+    let response = await post_data(url_work, formData);
+
+    if(response.status == 200){
+        alert('Ajour de photo avec succès.');
+    }else{
+        alert(`Erreur d'ajout de photo. \n Message d'erreur: "${response.body.message}"`);
+    }
+
+    
+
+});
 
 
 
