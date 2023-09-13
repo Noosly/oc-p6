@@ -584,12 +584,21 @@ header nav a:hover {
 .div-browse-photo__svg-empty-image{
 	width: 76px;
 	height: 76px;
+
 }
 
+/*
 .div-browse-photo__new-photo-img{
 	width: 420px;
 	height: 169px;
 	display: none;
+}
+*/
+.div-browse-photo__new-photo-img{
+	width: 120px;
+	height: 193px;
+	visibility: hidden;
+	z-index: 5;
 }
 
 .div-browse-photo__label-add-photo{
