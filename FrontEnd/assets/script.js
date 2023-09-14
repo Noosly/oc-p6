@@ -20,15 +20,26 @@ async function delete_data(url, id){
 
 async function post_data(url, data){
     const token = localStorage.getItem("token");
+    
+   
     const reponse = await fetch(url, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'multipart/form-data',
-            'Authorization': `Bearer ${token}`,
-            'accept': 'application/json'             
-        },
-        body: data, //JSON.stringify(data)
+            method: 'POST',
+            headers: {
+                'Content-Type': 'multipart/form-data',
+                'Authorization': `Bearer ${token}`,
+                'Accept': 'application/json'             
+            },
+            body: data, //JSON.stringify(data)
     });
+
+   
+   
+
+    if (!reponse.ok) {
+        // Handle HTTP error responses here
+        throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    
     const reponse_body = await reponse.json();
     const reponse_status =  reponse.status;
     return {"status": reponse_status, "body": reponse_body};    
@@ -231,6 +242,26 @@ function close_modal_window(){
     location.reload();
 }
 
+function browse_photo(){
+    let imgage_file = btn_browse_photo.files[0];
+    console.log(imgage_file);
+    if (imgage_file) {
+        const fileReader = new FileReader();
+        fileReader.readAsDataURL(imgage_file);
+        console.log(fileReader);
+        fileReader.addEventListener("load", function () {
+            new_photo_img.style.visibility = 'visible';
+            new_photo_img.setAttribute('src', this.result);
+        });    
+        svg_empty_image.style.display = 'none';
+        label_add_photo.style.display = 'none';
+        btn_browse_photo.style.display = 'none';
+        photo_format.style.display = 'none';
+        new_photo_validate.disable = false;
+        new_photo_validate.classList.add('new-photo__validate--enabled');        
+    }    
+}
+
 
 
 
@@ -249,6 +280,10 @@ const new_photo_img = document.querySelector(".div-browse-photo__new-photo-img")
 const new_photo_title = document.querySelector("#input_title");
 const new_photo_category = document.querySelector("#input_category");
 const new_photo_validate = document.querySelector("#new-photo__validate");
+const svg_empty_image = document.querySelector('.div-browse-photo__svg-empty-image');
+const label_add_photo = document.querySelector('.div-browse-photo__label-add-photo');
+const photo_format = document.querySelector('.div-browse-photo__photo-format');
+const form_new_photo = document.querySelector("#form-new-photo");
 
 var selectedFile; 
 
@@ -258,85 +293,56 @@ show_login_logout(a_login, userId);
 show_hide_edition_mode(header_edition, div_edition_intro, div_edition_projects, div_filters, userId);
 div_edition_intro.addEventListener('click', open_modal_window);
 div_edition_projects.addEventListener('click', open_modal_window);
-//Exp
-////modal_window_all_photos_delete_add_event_listener(url_work);
-//localStorage.setItem("currentWorks", current_works);
 exit_photos_gallery.addEventListener('click', close_modal_window);
 exit_add_photo.addEventListener('click', close_modal_window);
+btn_browse_photo.addEventListener('change', browse_photo);
 
-btn_browse_photo.addEventListener('change', function(event){
-    let imgPreview = document.querySelector('.div-browse-photo__new-photo-img');
-    let chooseFile = document.querySelector('#div-browse-photo__btn-add-photo');
-    let svg_empty_image = document.querySelector('.div-browse-photo__svg-empty-image');
-    let label_add_photo = document.querySelector('.div-browse-photo__label-add-photo');
-    let photo_format = document.querySelector('.div-browse-photo__photo-format');
-    
-    
-    const files = chooseFile.files[0];
-    console.log(files);
-    if (files) {
+
+/*
+btn_browse_photo.addEventListener('change', function(){
+    let imgage_file = btn_browse_photo.files[0];
+    console.log(imgage_file);
+    if (imgage_file) {
         const fileReader = new FileReader();
-        fileReader.readAsDataURL(files);
+        fileReader.readAsDataURL(imgage_file);
         console.log(fileReader);
         fileReader.addEventListener("load", function () {
-        imgPreview.style.visibility = 'visible';
-        //imgPreview.innerHTML = '<img src="' + this.result + '" />';
-        imgPreview.setAttribute('src', this.result );
+            new_photo_img.style.visibility = 'visible';
+            new_photo_img.setAttribute('src', this.result);
         });    
-        console.log(imgPreview.innerHTML);
         svg_empty_image.style.display = 'none';
         label_add_photo.style.display = 'none';
         btn_browse_photo.style.display = 'none';
         photo_format.style.display = 'none';
         new_photo_validate.disable = false;
         new_photo_validate.classList.add('new-photo__validate--enabled');        
-    }
-    /*
-    selectedFile = event.target.files[0];
-    console.log(selectedFile);
-    console.log(selectedFile.name);
-    localStorage.setItem("selectedImage", selectedFile.name);
-    
-
-    let image = document.querySelector(".div-browse-photo__new-photo-img");
-    image.setAttribute('src', selectedFile.name);
-        
-    /*const title = new_photo_title.value;
-    const category = new_photo_category.selected; 
-    alert(selectedFile);
-    alert(title);
-    alert(category);*/
-
-    
+    }    
 });
+*/
 
 
-new_photo_validate.addEventListener('click', async function(){
-    var selectedImage = localStorage.getItem("selectedImage");
-    let browser = document.querySelector("#div-browse-photo__btn-add-photo");
-    selectedImage = browser.files[0];
-    console.log(selectedImage);
-    var formData = new FormData();
-    formData.append('image', selectedImage.name +  ';' +  selectedImage.type);
-    var input_title = document.querySelector('#input_title');
-    formData.append('title', input_title.value);
-    var input_category = document.querySelector('#input_category');
-    formData.append('category', input_category.value);
-    let response = await post_data(url_work, formData);
-    //#div-browse-photo__btn-add-photo
 
-    alert(response.status)
-
+form_new_photo.addEventListener('submit', async function(ev){
+    let form_data = new FormData(form_new_photo);
+    let selectedImage = btn_browse_photo.files[0];
+    form_data.append('image', selectedImage);
+    form_data.append('title', input_title.value);
+    form_data.append('category', input_category.value);
     
-    if(response.status == 200){
-        alert('Ajour de photo avec succès.');
-    }else{
-        alert(`Erreur d'ajout de photo. \n Message d'erreur: "${response.body.message}"`);
-    }
-    
-
-    
-
+    let req = new XMLHttpRequest();
+    req.open("POST", url_work, true);
+    req.onload = function(load_ev){
+        if(req.status == 201){
+            alert('Gallerie crée avec succès');  
+        }
+        else{
+            alert(`Erreur ${req.status} lors de l'envoie de la gallerie`);
+        }
+    };
+    let token = localStorage.getItem('token');    
+    req.setRequestHeader('Authorization', `Bearer ${token}`);
+    req.send(form_data);
+    ev.preventDefault();
 });
 
 

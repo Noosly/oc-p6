@@ -144,16 +144,17 @@
 			<div class="exit" id="exit-new-photo">x</div>
 			</div>
 		<div class="new-photo__content">
-			<span class="new-photo__title">Ajout photo</span>
-			<div class="div-browse-photo">
-				<br>
-				<img src="assets/icons/image-02-svgrepo-com.svg" alt="svg repo" class="div-browse-photo__svg-empty-image">
-				<img src="" alt="..." class="div-browse-photo__new-photo-img">
-				<input id="div-browse-photo__btn-add-photo" type="file">
-				<label class="div-browse-photo__label-add-photo" for="div-browse-photo__btn-add-photo">+Ajouter photo</label>
-				<div class="div-browse-photo__photo-format">jpg, png: 4mo max</div>
-			</div>
-			<form>
+			<form enctype="multipart/form-data" id="form-new-photo">
+				<span class="new-photo__title">Ajout photo</span>
+				<div class="div-browse-photo">
+					<br>
+					<img src="assets/icons/image-02-svgrepo-com.svg" alt="svg repo" class="div-browse-photo__svg-empty-image">
+					<img src="" alt="..." class="div-browse-photo__new-photo-img">
+					<input id="div-browse-photo__btn-add-photo" type="file" accept="image/*">
+					<label class="div-browse-photo__label-add-photo" for="div-browse-photo__btn-add-photo">+Ajouter photo</label>
+					<div class="div-browse-photo__photo-format">jpg, png: 4mo max</div>
+				</div>
+			
 				<label for="input_title" class="new-photo__label">Titre</label>
 				<input type="text" id="input_title">
 		
@@ -167,7 +168,8 @@
 				</select>
 
 				<hr>
-				<button id="new-photo__validate" class="new-photo__validate" >Valider</button>
+				
+				<input id="new-photo__validate" class="new-photo__validate" type="submit" value="Valider">
 
 			</form>
 			

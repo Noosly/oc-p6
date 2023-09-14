@@ -538,7 +538,7 @@ header nav a:hover {
 
 }
 
-.new-photo__validate{
+input.new-photo__validate{
 	background-color: grey;
 	color: white;
 	width: 237px;
@@ -556,7 +556,7 @@ header nav a:hover {
 	
 } 
 
-.new-photo__validate--enabled{
+input.new-photo__validate--enabled{
 	background-color: #1D6154;
 }
 .new-photo__title{
@@ -584,16 +584,8 @@ header nav a:hover {
 .div-browse-photo__svg-empty-image{
 	width: 76px;
 	height: 76px;
-
 }
 
-/*
-.div-browse-photo__new-photo-img{
-	width: 420px;
-	height: 169px;
-	display: none;
-}
-*/
 .div-browse-photo__new-photo-img{
 	width: 120px;
 	height: 193px;
