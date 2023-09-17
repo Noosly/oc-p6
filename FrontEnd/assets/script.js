@@ -175,20 +175,11 @@ function add_event_listenerer_to_modal_window_photo(works, works_url){
             let response = await delete_work(works_url, w.id);
             if(response.ok){                
                 alert(`La photo ID ${w.id} supprimée avec succès`);
-                
-                //let modal_window_figure = document.getElementById(`modal_window_figure_${w.id}`);
-                
-                //modal_window_figure.remove(); 
-                //modal_window_photo.remove();
                 let figure = this.parentElement.parentElement;
                 figure.remove();
                 let gallery_photo_figure = document.getElementById(`gallery_photo_figure_${w.id}`);    
                 gallery_photo_figure.remove();
-                //div_edition_intro.closest()
-            }
-            //modal_window.style.display = 'block';
-            //gallery.style.display = 'block';
-            
+            } 
         });
     }       
 } 
@@ -204,8 +195,6 @@ async function modal_window_go_to_add_photo(){
     for(let c of categories){
         input_category.innerHTML += `<option value="${c.id}">${c.name}</option>`
     }
-    
-
 }
 
 function modal_window_go_to_gallery(){
