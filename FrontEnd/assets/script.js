@@ -18,32 +18,6 @@ async function delete_data(url, id){
     return reponse;
 }
 
-async function post_data(url, data){
-    const token = localStorage.getItem("token");
-    
-   
-    const reponse = await fetch(url, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'multipart/form-data',
-                'Authorization': `Bearer ${token}`,
-                'Accept': 'application/json'             
-            },
-            body: data, //JSON.stringify(data)
-    });
-
-   
-   
-
-    if (!reponse.ok) {
-        // Handle HTTP error responses here
-        throw new Error(`HTTP error! Status: ${response.status}`);
-    }
-    
-    const reponse_body = await reponse.json();
-    const reponse_status =  reponse.status;
-    return {"status": reponse_status, "body": reponse_body};    
-}
 
 async function get_categories(url_categories){
     let categories = await get_data(url_categories);
@@ -205,8 +179,7 @@ function modal_window_go_to_gallery(){
 }
 
 async function open_modal_window(){
-    gallery_list = document.querySelector(".photos-gallery__list");
-    //let current_works = localStorage.getItem("currentWorks");    
+    gallery_list = document.querySelector(".photos-gallery__list");  
     let current_works = await get_data(url_work);
     gallery_list.innerHTML = await fill_div_gallery_modal_window(current_works);
     add_event_listenerer_to_modal_window_photo(current_works, url_work);
@@ -214,7 +187,6 @@ async function open_modal_window(){
     btn_add_photo.addEventListener('click', modal_window_go_to_add_photo);
     let btn_new_photo_back = document.querySelector(".new-photo-back");
     btn_new_photo_back.addEventListener('click', modal_window_go_to_gallery);  
-    ////
     let modal_window = document.querySelector(".modal-window");
     let gallery = document.querySelector(".photos-gallery");
     modal_window.style.display = 'block';
@@ -252,8 +224,6 @@ function browse_photo(){
 }
 
 
-
-
 const div_gallery = document.querySelector(".gallery");
 const div_filters = document.querySelector(".filters");
 const a_login = document.querySelector("#a_login");
@@ -273,9 +243,6 @@ const svg_empty_image = document.querySelector('.div-browse-photo__svg-empty-ima
 const label_add_photo = document.querySelector('.div-browse-photo__label-add-photo');
 const photo_format = document.querySelector('.div-browse-photo__photo-format');
 const form_new_photo = document.querySelector("#form-new-photo");
-
-var selectedFile; 
-
 initialisation(url_work, div_gallery, div_filters, url_categories);
 let userId = localStorage.getItem("userId");
 show_login_logout(a_login, userId);
@@ -286,38 +253,12 @@ exit_photos_gallery.addEventListener('click', close_modal_window);
 exit_add_photo.addEventListener('click', close_modal_window);
 btn_browse_photo.addEventListener('change', browse_photo);
 
-
-/*
-btn_browse_photo.addEventListener('change', function(){
-    let imgage_file = btn_browse_photo.files[0];
-    console.log(imgage_file);
-    if (imgage_file) {
-        const fileReader = new FileReader();
-        fileReader.readAsDataURL(imgage_file);
-        console.log(fileReader);
-        fileReader.addEventListener("load", function () {
-            new_photo_img.style.visibility = 'visible';
-            new_photo_img.setAttribute('src', this.result);
-        });    
-        svg_empty_image.style.display = 'none';
-        label_add_photo.style.display = 'none';
-        btn_browse_photo.style.display = 'none';
-        photo_format.style.display = 'none';
-        new_photo_validate.disable = false;
-        new_photo_validate.classList.add('new-photo__validate--enabled');        
-    }    
-});
-*/
-
-
-
 form_new_photo.addEventListener('submit', async function(ev){
     let form_data = new FormData(form_new_photo);
     let selectedImage = btn_browse_photo.files[0];
     form_data.append('image', selectedImage);
     form_data.append('title', input_title.value);
-    form_data.append('category', input_category.value);
-    
+    form_data.append('category', input_category.value);    
     let req = new XMLHttpRequest();
     req.open("POST", url_work, true);
     req.onload = function(load_ev){
