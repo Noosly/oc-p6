@@ -178,8 +178,8 @@ function modal_window_go_to_gallery(){
     gallery.style.display = 'block';
 }
 
-function modal_window_remove_gallery(){
-    //
+function modal_window_remove_gallery(url_works){
+    //delete
 }
 
 async function open_modal_window(){
@@ -196,7 +196,9 @@ async function open_modal_window(){
     modal_window.style.display = 'block';
     gallery.style.display = 'block';
     let btn_remove_gallery = document.querySelector(".photos-gallery__remove");
-    btn_remove_gallery.addEventListener('click', modal_window_remove_gallery);
+    btn_remove_gallery.addEventListener('click', function(){
+        modal_window_remove_gallery(current_works, url_work);
+    });
 }
 
 function close_modal_window(){
