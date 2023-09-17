@@ -191,6 +191,7 @@ async function open_modal_window(){
     let gallery = document.querySelector(".photos-gallery");
     modal_window.style.display = 'block';
     gallery.style.display = 'block';
+    let btn_remove_gallery = document.querySelector(".photos-gallery__remove");
 }
 
 function close_modal_window(){
