@@ -20,12 +20,10 @@ async function post_data(url, data){
 async function authentification(url_login, user){
     let response = await post_data(url_login, user);
     return response;
-
 }
 
 
-async function  initialisation(btn, url_login){
-   
+async function  initialisation(btn, url_login){   
     btn.addEventListener('click', async function(){
         let utilisateur = {
             "email": `${inputEmail.value}`,
@@ -36,14 +34,10 @@ async function  initialisation(btn, url_login){
             localStorage.setItem("token", reponse.body.token);
             localStorage.setItem("userId", reponse.body.userId);
             window.location.href = "./index.html";
-           
-
         }else{
             alert(`Erreur d'authentification. \n Message d'erreur: "${reponse.body.message}"`);
         }
-
     });
-
 }
 
 initialisation(btnConnect, url_login);

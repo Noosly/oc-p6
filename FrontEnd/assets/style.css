@@ -385,15 +385,16 @@ header nav a:hover {
 	
 }
 
+
+
 .photos-gallery{	
 		background-color: #fff;
-		margin: 20% auto;
+		margin: 8% auto;
 		padding: 10px;		
 		width: 40%;
 		border-radius: 10px;
 		display: block;
 		padding: 40px;
-		
 
 }
 
@@ -403,7 +404,7 @@ header nav a:hover {
 
 .new-photo{	
 	background-color: #fff;
-	margin: 20% auto;
+	margin: 8% auto;
 	padding: 10px;		
 	width: 40%;
 	border-radius: 10px;
@@ -457,22 +458,24 @@ header nav a:hover {
 }
 
 .photos-gallery__list figure img{
-	width: 120px;
+	width: 76.86px;
+	height: 102.57px;
 }
 
 .photos-gallery__list figure figcaption{
-	width: 120px;
+	
+	width: 76.86px;
 }
 
 .photos-gallery__list figure div{
 	background-color: #000000;	
 	cursor: pointer;
 	width: fit-content;
-	padding: 5px;
+	padding: 3px;
 	position: absolute;
 	z-index: 1;
-	right: 10px;
-	top: 10px;
+	right: 3px;
+	top: 3px;
 
 }
 
@@ -567,6 +570,7 @@ input.new-photo__validate--enabled{
 	line-height: 30px;
 	text-align: center;
 	color: black;
+	padding: 120px
 }
 
 .div-browse-photo{
