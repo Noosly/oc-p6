@@ -178,7 +178,7 @@ function modal_window_go_to_gallery(){
     gallery.style.display = 'block';
 }
 
-function modal_window_remove_gallery(url_works){
+function modal_window_remove_gallery(works, url_works){
     //delete
 }
 
