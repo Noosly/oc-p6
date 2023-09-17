@@ -275,6 +275,8 @@ form_new_photo.addEventListener('submit', async function(ev){
     req.onload = function(load_ev){
         if(req.status == 201){
             alert('Gallerie crée avec succès');  
+            modal_window_go_to_gallery();
+
         }
         else{
             alert(`Erreur ${req.status} lors de l'envoie de la gallerie`);
