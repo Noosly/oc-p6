@@ -178,6 +178,10 @@ function modal_window_go_to_gallery(){
     gallery.style.display = 'block';
 }
 
+function modal_window_remove_gallery(){
+    //
+}
+
 async function open_modal_window(){
     gallery_list = document.querySelector(".photos-gallery__list");  
     let current_works = await get_data(url_work);
@@ -192,6 +196,7 @@ async function open_modal_window(){
     modal_window.style.display = 'block';
     gallery.style.display = 'block';
     let btn_remove_gallery = document.querySelector(".photos-gallery__remove");
+    btn_remove_gallery.addEventListener('click', modal_window_remove_gallery);
 }
 
 function close_modal_window(){
