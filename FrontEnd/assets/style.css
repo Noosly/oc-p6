@@ -389,7 +389,7 @@ header nav a:hover {
 
 .photos-gallery{	
 		background-color: #fff;
-		margin: 8% auto;
+		margin: 9% auto;
 		padding: 10px;		
 		width: 40%;
 		border-radius: 10px;
@@ -404,11 +404,12 @@ header nav a:hover {
 
 .new-photo{	
 	background-color: #fff;
-	margin: 8% auto;
+	margin: 9% auto;
 	padding: 10px;		
 	width: 40%;
 	border-radius: 10px;
 	display: none;
+
 }
 
 .projects{
