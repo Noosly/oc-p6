@@ -178,11 +178,12 @@ function modal_window_go_to_gallery(){
     gallery.style.display = 'block';
 }
 
-function modal_window_remove_gallery(works, works_url){
+async function modal_window_remove_gallery(works_url){
+    let works = await get_data(url_work);
     for(let w of works){
         delete_work(works_url, w.id);        
     }
-    alert('Gallery supprimée.');
+    alert('Gallery supprimée avec succès.');
     gallery_list = document.querySelector(".photos-gallery__list");
     gallery_list.innerHTML = "";
 }
@@ -202,7 +203,7 @@ async function open_modal_window(){
     gallery.style.display = 'block';
     let btn_remove_gallery = document.querySelector(".photos-gallery__remove");
     btn_remove_gallery.addEventListener('click', function(){
-        modal_window_remove_gallery(current_works, url_work);
+        modal_window_remove_gallery(url_work);
 
     });
 }
@@ -225,6 +226,7 @@ function browse_photo(){
         fileReader.readAsDataURL(imgage_file);
         console.log(fileReader);
         fileReader.addEventListener("load", function () {
+            new_photo_img.style.display = 'inline';
             new_photo_img.style.visibility = 'visible';
             new_photo_img.setAttribute('src', this.result);
         });    
@@ -289,8 +291,6 @@ form_new_photo.addEventListener('submit', async function(ev){
                                             <img src="${res.imageUrl}" alt="${res.imageUrl}">
                                             <figcaption>éditer</figcaption>
                                         </figure>`
-           
-            modal_window_go_to_gallery();
     
         }
         else{
@@ -300,10 +300,18 @@ form_new_photo.addEventListener('submit', async function(ev){
     let token = localStorage.getItem('token');    
     req.setRequestHeader('Authorization', `Bearer ${token}`);
     req.send(form_data);
-
-    
-    
     ev.preventDefault();
+    //Remove selection
+    
+    svg_empty_image.style.display = 'inline';
+    label_add_photo.style.display = 'inline';
+    btn_browse_photo.style.display = 'inline';
+    btn_browse_photo.style.visibility = 'hidden';
+    photo_format.style.display = 'inline';
+    new_photo_validate.disable = true;
+    new_photo_img.style.display = 'none';
+    new_photo_validate.classList.remove('new-photo__validate--enabled');  
+    modal_window_go_to_gallery();
 });
 
 
