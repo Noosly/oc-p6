@@ -178,8 +178,11 @@ function modal_window_go_to_gallery(){
     gallery.style.display = 'block';
 }
 
-function modal_window_remove_gallery(works, url_works){
-    //delete
+function modal_window_remove_gallery(works, works_url){
+    for(let w of works){
+        delete_work(works_url, w.id);
+    }
+    alert('Gallery supprimée.');
 }
 
 async function open_modal_window(){
