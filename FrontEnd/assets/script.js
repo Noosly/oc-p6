@@ -180,9 +180,11 @@ async function modal_window_remove_gallery(works_url){
     for(let w of works){
         delete_work(works_url, w.id);        
     }
-    alert('Gallery supprimée avec succès.');
+    
     gallery_list = document.querySelector(".photos-gallery__list");
     gallery_list.innerHTML = "";
+    div_gallery.innerHTML = "";
+    alert('Gallery supprimée avec succès.');
 }
 
 async function open_modal_window(){
