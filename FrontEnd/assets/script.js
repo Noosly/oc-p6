@@ -32,7 +32,7 @@ async function filter_works_by_category(all_works, category){
 }
 
 async function fill_div_gallery(works){
-    div_gallery_innerHTML = "";
+    let div_gallery_innerHTML = "";
     for(let w of works){
         div_gallery_innerHTML += `
             <figure id="gallery_photo_${w.id}">
@@ -137,12 +137,12 @@ async function delete_work(works_url, id_work){
         let figure = modal_window_photo.parentElement.parentElement;
         figure.remove();
         let gallery_photo_figure = document.getElementById(`gallery_photo_${id_work}`);
-        console.log(`gallery_photo_figure_${id_work}`)    
+        console.log(`gallery_photo_figure_${id_work}`);    
         gallery_photo_figure.remove();                
     } 
 }
 
-function add_event_listenerer_to_modal_window_photo(works, works_url){
+function add_event_listenerer_remove_photo(works, works_url){
     for(let w of works){
         let modal_window_photo = document.querySelector(`#modal_window_photo_${w.id}`);
         modal_window_photo.addEventListener('click', async function(){
@@ -171,12 +171,11 @@ function modal_window_go_to_gallery(){
     gallery.style.display = 'block';
 }
 
-async function modal_window_remove_gallery(works_url){
+async function modal_window_remove_all_photos(works_url){
     let works = await get_data(url_work);
     for(let w of works){
         delete_work(works_url, w.id);        
-    }
-    
+    }    
     let gallery_list = document.querySelector(".photos-gallery__list");
     gallery_list.innerHTML = "";
     div_gallery.innerHTML = "";
@@ -187,7 +186,7 @@ async function open_modal_window(){
     let gallery_list = document.querySelector(".photos-gallery__list");  
     let current_works = await get_data(url_work);
     gallery_list.innerHTML = await fill_div_gallery_modal_window(current_works);
-    add_event_listenerer_to_modal_window_photo(current_works, url_work);
+    add_event_listenerer_remove_photo(current_works, url_work);
     let btn_add_photo = document.querySelector(".photos-gallery__add");
     btn_add_photo.addEventListener('click', modal_window_go_to_add_photo);
     let btn_new_photo_back = document.querySelector(".new-photo-back");
@@ -196,9 +195,9 @@ async function open_modal_window(){
     let gallery = document.querySelector(".photos-gallery");
     modal_window.style.display = 'block';
     gallery.style.display = 'block';
-    let btn_remove_gallery = document.querySelector(".photos-gallery__remove");
-    btn_remove_gallery.addEventListener('click', function(){
-        modal_window_remove_gallery(url_work);
+    let btn_remove_all_gallery = document.querySelector(".photos-gallery__remove");
+    btn_remove_all_gallery.addEventListener('click', function(){
+        modal_window_remove_all_photos(url_work);
     });
 }
 
@@ -213,11 +212,9 @@ function close_modal_window(){
 
 function browse_photo(){
     let imgage_file = btn_browse_photo.files[0];
-    console.log(imgage_file);
     if (imgage_file) {
         const fileReader = new FileReader();
         fileReader.readAsDataURL(imgage_file);
-        console.log(fileReader);
         fileReader.addEventListener("load", function () {
             new_photo_img.style.display = 'inline';
             new_photo_img.style.visibility = 'visible';
@@ -262,12 +259,13 @@ function send_new_photo(ev){
                                                        
                                         <img src="${res.imageUrl}" alt="${res.imageUrl}">
                                         <figcaption>éditer</figcaption>
-                                    </figure>`);    
+                                    </figure>`
+            );    
         }
         else{
             alert(`Erreur ${req.status} lors de l'envoie de la gallerie`);
         }
-    };
+    }
     let token = localStorage.getItem('token');    
     req.setRequestHeader('Authorization', `Bearer ${token}`);
     req.send(form_data);
