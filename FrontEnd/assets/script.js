@@ -79,6 +79,7 @@ async function initialisation(url_work, div_gallery, div_filters){
     //Récupérer les catégories
     let categories =  await get_categories(url_categories);
     div_filters.innerHTML = await fill_div_filters(categories);
+    //Ajouter EventListener click à chaque catégorie
     for(let c of categories){
         let btn_filter_c = document.getElementById(`btn_filter_${c}`);
         btn_filter_c.addEventListener('click', async function(){
@@ -87,12 +88,13 @@ async function initialisation(url_work, div_gallery, div_filters){
             change_selected_bouton(btn_filter_c);
         });
     }
+    //Ajouter EventListener click au bouton Tous
     let btn_filter_tous = document.getElementById(`btn_filter_Tous`);
         btn_filter_tous.addEventListener('click', async function(){
             div_gallery.innerHTML = await fill_div_gallery(all_works);
             change_selected_bouton(btn_filter_tous);
         });   
-    
+    //Ajouter EventLister click pour le bouton Login pour vider localStorage
     a_login.addEventListener('click', function(){
         let userId = localStorage.getItem("userId");
         if(userId != ''){
@@ -136,8 +138,7 @@ async function delete_work(works_url, id_work){
         let modal_window_photo = document.querySelector(`#modal_window_photo_${id_work}`);
         let figure = modal_window_photo.parentElement.parentElement;
         figure.remove();
-        let gallery_photo_figure = document.getElementById(`gallery_photo_${id_work}`);
-        console.log(`gallery_photo_figure_${id_work}`);    
+        let gallery_photo_figure = document.getElementById(`gallery_photo_${id_work}`);   
         gallery_photo_figure.remove();                
     } 
 }
@@ -183,18 +184,24 @@ async function modal_window_remove_all_photos(works_url){
 }
 
 async function open_modal_window(){
+    //Charger les works dans la modal  Gallery
     let gallery_list = document.querySelector(".photos-gallery__list");  
     let current_works = await get_data(url_work);
     gallery_list.innerHTML = await fill_div_gallery_modal_window(current_works);
+    //Ajouter les Events Listeners pour supprimer les photos 
     add_event_listenerer_remove_photo(current_works, url_work);
+    //Ajouter Event Listener du click sur Bouton d'jout de photo (btn_add_photo)
     let btn_add_photo = document.querySelector(".photos-gallery__add");
     btn_add_photo.addEventListener('click', modal_window_go_to_add_photo);
+    //Ajouter les Events Listeners sur le bouton de retour arrière (btn_new_photo_back)
     let btn_new_photo_back = document.querySelector(".new-photo-back");
     btn_new_photo_back.addEventListener('click', modal_window_go_to_gallery);  
+    //Afficher la modal window Gallery
     let modal_window = document.querySelector(".modal-window");
     let gallery = document.querySelector(".photos-gallery");
     modal_window.style.display = 'block';
     gallery.style.display = 'block';
+    //Ajouter Event Listener pour boutton Supprimer Gallery (btn_remove_all_gallery)
     let btn_remove_all_gallery = document.querySelector(".photos-gallery__remove");
     btn_remove_all_gallery.addEventListener('click', function(){
         modal_window_remove_all_photos(url_work);
@@ -202,6 +209,7 @@ async function open_modal_window(){
 }
 
 function close_modal_window(){
+    //Masquer modal windows: gallery & add_photo
     let modal_window = document.querySelector(".modal-window");
     let gallery = document.querySelector(".photos-gallery");
     let add_photo = document.querySelector(".new-photo");
@@ -236,7 +244,10 @@ function send_new_photo(ev){
     form_data.append('title', input_title.value);
     form_data.append('category', input_category.value);    
     let req = new XMLHttpRequest();
-    req.open("POST", url_work, true);
+    req.open("POST", url_work, true);    
+    let token = localStorage.getItem('token');    
+    req.setRequestHeader('Authorization', `Bearer ${token}`);
+    req.send(form_data);
     req.onload =  function(){
         if(req.status == 201){
             alert(`Photo de Gallerie crée avec succès`);  
@@ -266,9 +277,6 @@ function send_new_photo(ev){
             alert(`Erreur ${req.status} lors de l'envoie de la gallerie`);
         }
     }
-    let token = localStorage.getItem('token');    
-    req.setRequestHeader('Authorization', `Bearer ${token}`);
-    req.send(form_data);
     ev.preventDefault();
     //Remove selection    
     svg_empty_image.style.display = 'inline';
@@ -301,6 +309,7 @@ const svg_empty_image = document.querySelector('.div-browse-photo__svg-empty-ima
 const label_add_photo = document.querySelector('.div-browse-photo__label-add-photo');
 const photo_format = document.querySelector('.div-browse-photo__photo-format');
 const form_new_photo = document.querySelector("#form-new-photo");
+
 initialisation(url_work, div_gallery, div_filters, url_categories);
 let userId = localStorage.getItem("userId");
 show_login_logout(a_login, userId);
